@@ -9,6 +9,38 @@ namespace CSP
 {
     public static class EigthKyu
     {
+        public static int SquareSumOriginal(int[] numbers)
+        {
+            int total = 0;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                total += numbers[i] * numbers[i];
+            }
+            return total;
+        }
+
+        public static int SquareSumWithLinq(int[] numbers)
+        {
+            return numbers.Sum(x => x * x);
+        }
+
+        public static int SquareSumWithLinqInline(int[] numbers) => numbers.Sum(x => x * x);
+
+        public static double FindAverage(double[] array) => array.Length == 0 ? 0.0 : array.Average();
+
+        static double BmiCalc(double weight, double height) => weight / (height * height);
+        public static string Bmi(double weight, double height) => BmiCalc(weight, height) switch
+        {
+            _ when BmiCalc(weight, height) > 30 => "Obese",
+            _ when BmiCalc(weight, height) > 25 => "Overweight",
+            _ when BmiCalc(weight, height) > 18.5 => "Normal",
+            _ => "Underweight"
+        };
+
+        public static int AreaOrPerimeter(int l, int w) => l == w ? l * w : 2 * (l + w);
+
+        public static int StringToNumber(String str) => int.Parse(str);
+
         public static int Opposite(int number) => -number;
 
         public static string ToAlternatingCase(this string s)

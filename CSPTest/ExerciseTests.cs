@@ -4,6 +4,72 @@ namespace CSPTest
 {
     public class ExerciseTests
     {
+        [Fact]
+        public void SquareSum()
+        {
+            //assemble
+            int[] arr = { 1, 2, 2 };
+            //act
+            int ans = EigthKyu.SquareSumOriginal(arr);
+            //assert
+            Assert.Equal(9, ans);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 2 }, 9)]
+        [InlineData(new int[] { 1, 1, 1 }, 3)]
+        public void SquareSumParam(int[] arr, int answer)
+        {
+            int ans = EigthKyu.SquareSumWithLinq(arr);
+            int ans2 = EigthKyu.SquareSumWithLinqInline(arr);
+            Assert.Equal(answer, ans);
+            Assert.Equal(answer, ans2);
+        }
+
+        [Theory]
+        [InlineData(new double[] { }, 0.0)]
+        [InlineData(new double[] { 1.0, 1.1, 1.2, 1.3, 1.4 }, 1.2)]
+        [InlineData(new double[] { 1, 2, 3 }, 2.0)]
+        [InlineData(new double[] { 5, 5, 5, 5 }, 5.0)]
+        [InlineData(new double[] { 2, 3, 6, 7, 1 }, 3.8)]
+        public void FindAverage(double[] numbers, double answer)
+        {
+            double avg = EigthKyu.FindAverage(numbers);
+            Assert.Equal(answer, avg);
+        }
+
+        [Theory]
+        [InlineData(50, 1.80, "Underweight")]
+        [InlineData(80, 1.80, "Normal")]
+        [InlineData(90, 1.80, "Overweight")]
+        [InlineData(100, 1.80, "Obese")]
+        public void Bmi(double weight, double height, string message)
+        {
+            string msg = EigthKyu.Bmi(weight, height);
+            Assert.Equal(message, msg);
+        }
+
+        [Theory]
+        [InlineData(10, 10, 100)]
+        [InlineData(4, 4, 16)]
+        [InlineData(6, 10, 32)]
+        public void AreaOrPerimeter(int length, int width, int answer)
+        {
+            int result = EigthKyu.AreaOrPerimeter(length, width);
+            Assert.Equal(answer, result);
+        }
+
+        [Theory]
+        [InlineData("1234", 1234)]
+        [InlineData("605", 605)]
+        [InlineData("1405", 1405)]
+        [InlineData("-7", -7)]
+        public void StringToNumber(string value, int answer)
+        {
+            int ans = EigthKyu.StringToNumber(value);
+            Assert.Equal(answer, ans);
+        }
+
         [Theory]
         [InlineData(1, -1)]
         [InlineData(-1, 1)]
