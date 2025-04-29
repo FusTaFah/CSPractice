@@ -107,5 +107,12 @@ namespace CSP
         {
             return Math.Sqrt(n) % 1 == 0;
         }
+
+        public static int[] minMax(int[] lst)
+        {
+            List<int> sortedList = new List<int>(lst);
+            sortedList.Sort();
+            return new int[] { sortedList[0], sortedList[^1] };
+        }
     }
 }

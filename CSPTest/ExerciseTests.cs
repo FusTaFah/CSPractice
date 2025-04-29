@@ -219,5 +219,14 @@ namespace CSPTest
         {
             Assert.Equal(answer, SeventhKyu.IsSquareBetterSolution(n));
         }
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 5, -1, 12, 20 }, new int[] { -1, 20 })]
+        [InlineData(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 5 })]
+        [InlineData(new int[] { 1, 2, -3, 4, 5 }, new int[] { -3, 5 })]
+        public void minMax(int[] lst, int[] answer)
+        {
+            Assert.Equal(answer, SeventhKyu.minMax(lst));
+        }
     }
 }
