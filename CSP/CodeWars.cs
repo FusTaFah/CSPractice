@@ -110,6 +110,7 @@ namespace CSP
 
         public static int[] minMax(int[] lst)
         {
+            //you can also use Array.Sort for arrays. no need to make into a list
             List<int> sortedList = new List<int>(lst);
             sortedList.Sort();
             return new int[] { sortedList[0], sortedList[^1] };
