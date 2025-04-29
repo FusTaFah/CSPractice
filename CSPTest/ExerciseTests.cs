@@ -179,6 +179,7 @@ namespace CSPTest
         [InlineData("1.234", false)]
         [InlineData("-1.234", false)]
         [InlineData("00000000", false)]
+        [InlineData("1234\n", false)]
         [InlineData("1234", true)]
         [InlineData("0000", true)]
         [InlineData("1111", true)]
@@ -189,6 +190,34 @@ namespace CSPTest
         public void ValidatePin(string pin, bool answer)
         {
             Assert.Equal(answer, SeventhKyu.ValidatePin(pin));
+        }
+
+        [Theory]
+        [InlineData(-1, false)]
+        [InlineData(3, false)]
+        [InlineData(4, true)]
+        [InlineData(25, true)]
+        [InlineData(26, false)]
+        [InlineData(81, true)]
+        [InlineData(2147395600, true)]
+        [InlineData(int.MaxValue, false)]
+        public void IsSquare(int n, bool answer)
+        {
+            Assert.Equal(answer, SeventhKyu.IsSquare(n));
+        }
+
+        [Theory]
+        [InlineData(-1, false)]
+        [InlineData(3, false)]
+        [InlineData(4, true)]
+        [InlineData(25, true)]
+        [InlineData(26, false)]
+        [InlineData(81, true)]
+        [InlineData(2147395600, true)]
+        [InlineData(int.MaxValue, false)]
+        public void IsSquareBetterSolution(int n, bool answer)
+        {
+            Assert.Equal(answer, SeventhKyu.IsSquareBetterSolution(n));
         }
     }
 }

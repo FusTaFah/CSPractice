@@ -91,9 +91,21 @@ namespace CSP
                 _ => string.Empty
             }));
 
-        public static bool ValidatePin(string pin)
+        public static bool ValidatePin(string pin) => Regex.IsMatch(pin, @"(?<!.)(?:\d{4}|\d{6})(?!(?:.|\n))");
+
+        public static bool IsSquare(int n)
         {
-            return Regex.IsMatch(pin, @"\d{4}") || Regex.IsMatch(pin, @"\d{6}");
+            if (n < 0) return false;
+
+            float sq = MathF.Sqrt(n);
+            float exp = MathF.Truncate(sq);
+
+            return sq - exp <= float.Epsilon;
+        }
+
+        public static bool IsSquareBetterSolution(int n)
+        {
+            return Math.Sqrt(n) % 1 == 0;
         }
     }
 }
