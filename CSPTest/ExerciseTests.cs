@@ -228,5 +228,38 @@ namespace CSPTest
         {
             Assert.Equal(answer, SeventhKyu.minMax(lst));
         }
+
+        [Theory]
+        [InlineData("The quick brown fox jumps over the lazy dog.", true)]
+        [InlineData("BUMSEX BUMSEX BUMSEX BUM 12345", false)]
+        [InlineData("The five boxing wizards jump quickly.", true)]
+        [InlineData("Pack my box with five dozen liquor jugs.", true)]
+        [InlineData("Go, lazy fat vixen; be shrewd, jump quick.", true)]
+        [InlineData("When zombies arrive, quickly fax Judge Pat.", true)]
+        [InlineData("Amazingly few discotheques provide jukeboxes.", true)]
+        [InlineData("Puzzled women bequeath jerks very exotic gifts.", true)]
+        [InlineData("The quick onyx goblin jumps over the lazy dwarf.", true)]
+        [InlineData("Brawny gods just flocked up to quiz and vex him.", true)]
+        [InlineData("Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.", true)]
+        public void IsPangram(string n, bool answer)
+        {
+            Assert.Equal(answer, SixthKyu.IsPangram(n));
+        }
+
+        [Theory]
+        [InlineData(".... . -.--   .--- ..- -.. .", "HEY JUDE")]
+        public void Decode(string morseCode, string answer)
+        {
+            Assert.Equal(answer, SixthKyu.Decode(morseCode));
+        }
+
+        [Theory]
+        [InlineData("1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011", "HEY JUDE")]
+        public void DecodeBitsAndMorse(string bits, string answer)
+        {
+            string morse = FourthKyu.DecodeBits(bits);
+            string ans = FourthKyu.DecodeMorse(morse);
+            Assert.Equal(answer, ans);
+        }
     }
 }

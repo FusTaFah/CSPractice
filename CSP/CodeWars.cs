@@ -1,12 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace CSP
 {
+    public static class MorseCode
+    {
+        public static string Get(string morse) => morse switch
+        {
+            ".-" => "A",
+            "-..." => "B",
+            "-.-." => "C",
+            "-.." => "D",
+            "." => "E",
+            "..-." => "F",
+            "--." => "G",
+            "...." => "H",
+            ".." => "I",
+            ".---" => "J",
+            "-.-" => "K",
+            ".-.." => "L",
+            "--" => "M",
+            "-." => "N",
+            "---" => "O",
+            ".--." => "P",
+            "--.-" => "Q",
+            ".-." => "R",
+            "..." => "S",
+            "-" => "T",
+            "..-" => "U",
+            "...-" => "V",
+            ".--" => "W",
+            "-..-" => "X",
+            "-.--" => "Y",
+            "--.." => "Z",
+            _ => throw new NotImplementedException()
+        };
+    }
     public static class EigthKyu
     {
         public static int SquareSumOriginal(int[] numbers)
@@ -115,5 +145,30 @@ namespace CSP
             sortedList.Sort();
             return new int[] { sortedList[0], sortedList[^1] };
         }
+    }
+
+    public static class SixthKyu
+    {
+        public static bool IsPangram(string str) => str.ToLower().Distinct().Count(x => Char.IsLetter(x)) == 26;
+
+        public static string Decode(string morseCode) => string.Join(' ', morseCode.Trim().Split("   ").Select(x => string.Concat(x.Split(' ').Select(y => MorseCode.Get(y))))).ToUpper();
+    }
+
+    public static class FourthKyu
+    {
+        public static string DecodeBits(string bits)
+        {
+            string decode = bits.Trim('0'); //trim trailing and leading zeroes
+            int minTimeUnit = Regex.Matches(decode, "(1+|0+)").Min(x => x.Length); //find the time unit
+            decode = Regex.Replace(decode, $"1{{{minTimeUnit * 3}}}",  "-"); //resolve dashes
+            decode = Regex.Replace(decode, $"1{{{minTimeUnit}}}", "."); //resolve dots
+            decode = Regex.Replace(decode, $"0{{{minTimeUnit * 7}}}", "   "); //resolve word-spaces
+            decode = Regex.Replace(decode, $"0{{{minTimeUnit * 3}}}", " "); //resolve character-spaces
+            decode = Regex.Replace(decode, $"0{{{minTimeUnit}}}", ""); //resolve morse spaces
+            decode = Regex.Replace(decode, $"1+", "."); //resolve undefined characters
+            return decode;
+        }
+
+        public static string DecodeMorse(string morseCode) => string.Join(' ', morseCode.Trim().Split("   ").Select(x => string.Concat(x.Split(' ').Select(y => MorseCode.Get(y))))).ToUpper();
     }
 }
